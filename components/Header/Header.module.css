@@ -1,0 +1,30 @@
+.header {
+    height: 72px;
+    padding: 0 64px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    width: 136px;
+    /* margin-right: 450px; */
+}
+
+.nav {
+    display: flex;
+    gap: 24px;
+}
+
+.active {
+    color: #829b91;
+}
+
+.empty {
+    width: 136px;
+}
