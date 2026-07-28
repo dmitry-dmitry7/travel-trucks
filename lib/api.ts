@@ -36,14 +36,21 @@ export interface CampersParams {
   perPage?: number;
   location?: string;
   form?: string;
-  engine?: string;
   transmission?: string;
+  engine?: string;
 }
 
 export const getCampers = async (
   params: CampersParams
 ): Promise<CampersResponse> => {
-  const { data } = await api.get('/campers', { params });
+  const cleanParams = Object.fromEntries(
+    Object.entries(params).filter(([, value]) => value !== '')
+  );
+
+  const { data } = await api.get('/campers', {
+    params: cleanParams,
+  });
+
   return data;
 };
 
