@@ -1,0 +1,140 @@
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px;
+    background: #f5f5f5;
+}
+
+.sidebar {
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px;
+    height: fit-content;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input {
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 0 16px;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.searchBtn {
+    height: 52px;
+    border: none;
+    border-radius: 30px;
+    background: #839c8f;
+    color: white;
+    cursor: pointer;
+}
+
+.clearBtn {
+    height: 52px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+}
+
+.catalog {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.card {
+    display: flex;
+    gap: 24px;
+    background: #fff;
+    border-radius: 24px;
+    padding: 20px;
+}
+
+.image {
+    width: 292px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.content {
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.meta {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.tags {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.tags span {
+    background: #eef0f2;
+    padding: 10px 16px;
+    border-radius: 999px;
+}
+
+.moreBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 48px;
+    border-radius: 30px;
+    background: #839c8f;
+    color: white;
+    text-decoration: none;
+}
+
+.loadMore {
+    width: 160px;
+    height: 52px;
+    margin: 20px auto 0;
+    border-radius: 30px;
+    background: white;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
