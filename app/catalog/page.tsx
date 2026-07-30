@@ -37,22 +37,28 @@ export default function CatalogPage() {
     queryFn: getFilters,
   });
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ['campers', appliedFilters],
-      initialPageParam: 1,
-      queryFn: ({ pageParam }) =>
-        getCampers({
-          page: pageParam,
-          perPage: PER_PAGE,
-          ...appliedFilters,
-        }),
-      getNextPageParam: lastPage => {
-        return lastPage.page < lastPage.totalPages
-          ? lastPage.page + 1
-          : undefined;
-      },
-    });
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isFetching,
+  } = useInfiniteQuery({
+    queryKey: ['campers', appliedFilters],
+    initialPageParam: 1,
+    queryFn: ({ pageParam }) =>
+      getCampers({
+        page: pageParam,
+        perPage: PER_PAGE,
+        ...appliedFilters,
+      }),
+    getNextPageParam: lastPage => {
+      return lastPage.page < lastPage.totalPages
+        ? lastPage.page + 1
+        : undefined;
+    },
+  });
 
   const campers = data?.pages.flatMap(page => page.campers) ?? [];
 
@@ -75,6 +81,19 @@ export default function CatalogPage() {
 
   return (
     <div className={styles.container}>
+      {(isLoading || (isFetching && !isFetchingNextPage)) && (
+        <div className={styles.loaderOverlay}>
+          <div className={styles.loaderModal}>
+            <div className={styles.spinner}></div>
+
+            <h3>Loading tracks...</h3>
+            <br />
+
+            <p>Please wait while we fetch the best travel trucks for you</p>
+          </div>
+        </div>
+      )}
+
       <aside className={styles.sidebar}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <label className={styles.label}>
