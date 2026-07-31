@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+import noCampersImg from '@/public/Image/no-campers-found.png';
 
 import { Camper, getCampers, getFilters } from '@/lib/api';
 
@@ -190,52 +192,97 @@ export default function CatalogPage() {
       </aside>
 
       <section className={styles.catalog}>
-        {campers.map((camper: Camper) => (
-          <article key={camper.id} className={styles.card}>
-            <img
-              src={camper.coverImage}
-              alt={camper.name}
-              className={styles.image}
+        {!isLoading && campers.length === 0 ? (
+          <div className={styles.emptyState}>
+            <Image
+              src={noCampersImg}
+              alt="No campers found"
+              className={styles.emptyImage}
             />
 
-            <div className={styles.content}>
-              <div className={styles.header}>
-                <h2>{camper.name}</h2>
+            <h2>No campers found</h2>
 
-                <span className={styles.price}>€{camper.price}</span>
-              </div>
+            <p>
+              We couldn&apos;t find any campers that match your filters.
+              <br />
+              Try adjusting your search or clearing some filters.
+            </p>
 
-              <div className={styles.meta}>
-                ⭐ {camper.rating} ({camper.totalReviews} Reviews)
-                {' • '}
-                {camper.location}
-              </div>
-
-              <div className={styles.tags}>
-                <span>{camper.engine}</span>
-                <span>{camper.transmission}</span>
-                <span>{camper.form}</span>
-              </div>
-
-              <Link
-                href={`/catalog/${camper.id}`}
-                target="_blank"
-                className={styles.moreBtn}
+            <div className={styles.emptyActions}>
+              <button
+                type="button"
+                onClick={clearFilters}
+                className={styles.emptyClearBtn}
               >
-                Show more
-              </Link>
-            </div>
-          </article>
-        ))}
+                ✕ Clear filters
+              </button>
 
-        {hasNextPage && (
-          <button
-            className={styles.loadMore}
-            onClick={() => fetchNextPage()}
-            disabled={isFetchingNextPage}
-          >
-            {isFetchingNextPage ? 'Loading...' : 'Load more'}
-          </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setAppliedFilters({
+                    location: '',
+                    form: '',
+                    engine: '',
+                    transmission: '',
+                  })
+                }
+                className={styles.emptyViewBtn}
+              >
+                View all campers
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            {campers.map((camper: Camper) => (
+              <article key={camper.id} className={styles.card}>
+                <img
+                  src={camper.coverImage}
+                  alt={camper.name}
+                  className={styles.image}
+                />
+
+                <div className={styles.content}>
+                  <div className={styles.header}>
+                    <h2>{camper.name}</h2>
+
+                    <span className={styles.price}>€{camper.price}</span>
+                  </div>
+
+                  <div className={styles.meta}>
+                    ⭐ {camper.rating} ({camper.totalReviews} Reviews)
+                    {' • '}
+                    {camper.location}
+                  </div>
+
+                  <div className={styles.tags}>
+                    <span>{camper.engine}</span>
+                    <span>{camper.transmission}</span>
+                    <span>{camper.form}</span>
+                  </div>
+
+                  <Link
+                    href={`/catalog/${camper.id}`}
+                    target="_blank"
+                    className={styles.moreBtn}
+                  >
+                    Show more
+                  </Link>
+                </div>
+              </article>
+            ))}
+
+            {hasNextPage && (
+              <button
+                className={styles.loadMore}
+                onClick={() => fetchNextPage()}
+                disabled={isFetchingNextPage}
+              >
+                {isFetchingNextPage ? 'Loading...' : 'Load more'}
+              </button>
+            )}
+          </>
         )}
       </section>
     </div>

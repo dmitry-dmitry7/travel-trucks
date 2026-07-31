@@ -1,9 +1,9 @@
 .container {
     position: relative;
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 360px 1fr;
     gap: 65px;
-    max-width: 1440px;
+    width: 1440px;
     margin: 0 auto;
     padding: 48px 64px 52px 63px;
     background: #fff;
@@ -66,6 +66,8 @@
     border-radius: 20px;
     padding: 24px;
     height: fit-content;
+    width: 360px;
+    height: 840px;
 }
 
 .form {
@@ -120,6 +122,64 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+}
+
+.emptyState {
+    width: 888px;
+    height: 840px;
+
+    background: #f7f7f7;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    padding: 0 48px;
+}
+
+.emptyImage {
+    width: 488px;
+    height: auto;
+    margin-bottom: 21px;
+}
+
+.emptyState h2 {
+    margin-bottom: 12px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #101828;
+}
+
+.emptyState p {
+    max-width: 420px;
+    color: #667085;
+    line-height: 1.5;
+    margin-bottom: 32px;
+}
+
+.emptyActions {
+    display: flex;
+    gap: 16px;
+}
+
+.emptyClearBtn {
+    height: 52px;
+    padding: 0 24px;
+    border-radius: 30px;
+    border: 1px solid #d0d5dd;
+    background: #fff;
+    cursor: pointer;
+}
+
+.emptyViewBtn {
+    height: 52px;
+    padding: 0 24px;
+    border-radius: 30px;
+    border: none;
+    background: #839c8f;
+    color: #fff;
+    cursor: pointer;
 }
 
 .card {
