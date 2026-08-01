@@ -72,16 +72,20 @@
 
 .infoCard {
     width: 644px;
-    background: #f8f8f8;
-    border-radius: 20px;
-    padding: 32px;
     display: flex;
     flex-direction: column;
+    gap: 16px;
 }
 
 .infoCard h1 {
     font-size: 32px;
     margin-bottom: 12px;
+}
+
+.infoMain {
+    padding: 24px;
+    background: #f8f8f8;
+    border-radius: 20px;
 }
 
 .meta {
@@ -111,7 +115,10 @@
 }
 
 .details {
-    margin-top: 32px;
+    padding: 24px;
+    /* margin-top: 32px; */
+    background: #f8f8f8;
+    border-radius: 20px;
 }
 
 .tags {

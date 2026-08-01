@@ -125,17 +125,19 @@ export default function CamperDetailsPage() {
         </div>
 
         <div className={styles.infoCard}>
-          <h1>{camper.name}</h1>
+          <div className={styles.infoMain}>
+            <h1>{camper.name}</h1>
 
-          <div className={styles.meta}>
-            ⭐ {camper.rating}({camper.totalReviews} Reviews)
-            <BsMap className={styles.metaIcon} />
-            {camper.location}
+            <div className={styles.meta}>
+              ⭐ {camper.rating}({camper.totalReviews} Reviews)
+              <BsMap className={styles.metaIcon} />
+              {camper.location}
+            </div>
+
+            <div className={styles.price}>€{camper.price}</div>
+
+            <p className={styles.description}>{camper.description}</p>
           </div>
-
-          <div className={styles.price}>€{camper.price}</div>
-
-          <p className={styles.description}>{camper.description}</p>
 
           <div className={styles.details}>
             <h2>Vehicle details</h2>

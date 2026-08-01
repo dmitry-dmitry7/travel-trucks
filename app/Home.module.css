@@ -33,6 +33,10 @@
     padding: 16px 32px;
     border-radius: 50px;
 
-    background: #869b92;
+    background: #829b91;
     color: white;
+}
+
+.button:hover {
+    background-color: #6d7b75;
 }

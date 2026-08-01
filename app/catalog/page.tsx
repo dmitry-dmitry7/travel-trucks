@@ -195,7 +195,7 @@ export default function CatalogPage() {
             onClick={clearFilters}
             className={styles.clearBtn}
           >
-            Clear filters
+            X Clear filters
           </button>
         </form>
       </aside>

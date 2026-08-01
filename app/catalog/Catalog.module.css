@@ -142,20 +142,39 @@
 }
 
 .searchBtn {
-    height: 52px;
+    height: 56px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+
     border: none;
     border-radius: 30px;
-    background: #839c8f;
+    background-color: #829b91;
     color: white;
     cursor: pointer;
 }
 
+.searchBtn:hover {
+    background-color: #6d7b75;
+}
+
 .clearBtn {
-    height: 52px;
+    height: 56px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: #101828;
+
     border-radius: 30px;
     border: 1px solid #ddd;
     background: white;
     cursor: pointer;
+}
+
+.clearBtn:hover {
+    border: 1px solid #6d7b75;
 }
 
 .catalog {
@@ -318,9 +337,13 @@
     width: 140px;
     height: 48px;
     border-radius: 30px;
-    background: #839c8f;
+    background-color: #829b91;
     color: white;
     text-decoration: none;
+}
+
+.moreBtn:hover {
+    background-color: #6d7b75;
 }
 
 .loadMore {
@@ -331,4 +354,8 @@
     background: white;
     border: 1px solid #ddd;
     cursor: pointer;
+}
+
+.loadMore:hover {
+    border: 1px solid #6d7b75;
 }
