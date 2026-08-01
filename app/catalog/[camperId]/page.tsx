@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { useForm } from 'react-hook-form';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
+
 import {
   getCamperById,
   getCamperReviews,
@@ -16,20 +19,36 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
+import { BsMap } from 'react-icons/bs';
+
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 import toast, { Toaster } from 'react-hot-toast';
 
 import styles from './CamperDetails.module.css';
 
+interface BookingFormData {
+  name: string;
+  email: string;
+}
+
 export default function CamperDetailsPage() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const { camperId } = useParams();
 
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<BookingFormData>({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    defaultValues: {
+      name: '',
+      email: '',
+    },
   });
 
   const { data: camper, isLoading } = useQuery({
@@ -43,17 +62,17 @@ export default function CamperDetailsPage() {
   });
 
   const bookingMutation = useMutation({
-    mutationFn: () => createBookingRequest(camperId as string, form),
-
+    mutationFn: (formData: BookingFormData) =>
+      createBookingRequest(camperId as string, formData),
     onSuccess: data => {
       toast.success(data.message);
-
-      setForm({
-        name: '',
-        email: '',
-      });
+      reset();
     },
   });
+
+  const onSubmit = (data: BookingFormData) => {
+    bookingMutation.mutate(data);
+  };
 
   if (isLoading || !camper) {
     return <div className={styles.loading}>Loading...</div>;
@@ -109,7 +128,8 @@ export default function CamperDetailsPage() {
           <h1>{camper.name}</h1>
 
           <div className={styles.meta}>
-            ⭐ {camper.rating}({camper.totalReviews} Reviews) •{' '}
+            ⭐ {camper.rating}({camper.totalReviews} Reviews)
+            <BsMap className={styles.metaIcon} />
             {camper.location}
           </div>
 
@@ -169,56 +189,82 @@ export default function CamperDetailsPage() {
           <div className={styles.reviews}>
             {reviews.map(review => (
               <div key={review.id} className={styles.reviewCard}>
-                <div className={styles.avatar}>{review.reviewer_name[0]}</div>
+                <div className={styles.reviewName}>
+                  <div className={styles.avatar}>{review.reviewer_name[0]}</div>
+                  <div>
+                    <h4>{review.reviewer_name}</h4>
 
-                <div>
-                  <h4>{review.reviewer_name}</h4>
-
-                  <div className={styles.stars}>
-                    {renderStars(review.reviewer_rating)}
+                    <div className={styles.stars}>
+                      {renderStars(review.reviewer_rating)}
+                    </div>
                   </div>
-
-                  <p>{review.comment}</p>
                 </div>
+                <p className={styles.reviewComment}>{review.comment}</p>
               </div>
             ))}
           </div>
 
-          <form
-            className={styles.booking}
-            onSubmit={e => {
-              e.preventDefault();
-              bookingMutation.mutate();
-            }}
-          >
+          <form className={styles.booking} onSubmit={handleSubmit(onSubmit)}>
             <h2>Book your campervan now</h2>
 
-            <p>Stay connected! We are always ready to help you.</p>
+            <p className={styles.formSubtitle}>
+              Stay connected! We are always ready to help you.
+            </p>
 
-            <input
-              placeholder="Name*"
-              value={form.name}
-              onChange={e =>
-                setForm(prev => ({
-                  ...prev,
-                  name: e.target.value,
-                }))
-              }
-            />
+            <div
+              className={`${styles.inputWrapper} ${errors.name ? styles.inputError : ''}`}
+            >
+              <label className={styles.fieldLabel}>Name*</label>
+              <input
+                placeholder="Name*"
+                type="text"
+                {...register('name', {
+                  required: 'Please enter your name.',
+                  pattern: {
+                    value: /^[a-zA-Zа-яА-ЯёЁ\s\-]+$/,
+                    message: 'Please enter a valid name.',
+                  },
+                })}
+              />
+              {errors.name && (
+                <>
+                  <span className={styles.errorIcon}>
+                    <AiOutlineExclamationCircle color="red" size={22} />
+                  </span>
+                  <p className={styles.errorMessage}>{errors.name.message}</p>
+                </>
+              )}
+            </div>
 
-            <input
-              placeholder="Email*"
-              type="email"
-              value={form.email}
-              onChange={e =>
-                setForm(prev => ({
-                  ...prev,
-                  email: e.target.value,
-                }))
-              }
-            />
+            <div
+              className={`${styles.inputWrapper} ${errors.email ? styles.inputError : ''}`}
+            >
+              <label className={styles.fieldLabel}>Email*</label>
+              <input
+                placeholder="Email*"
+                type="text"
+                {...register('email', {
+                  required: 'Please enter your email.',
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: 'Please enter a valid email.',
+                  },
+                })}
+              />
+              {errors.email && (
+                <>
+                  <span className={styles.errorIcon}>
+                    <AiOutlineExclamationCircle color="red" size={22} />
+                  </span>
+                  <p className={styles.errorMessage}>{errors.email.message}</p>
+                </>
+              )}
+            </div>
 
-            <button type="submit" disabled={bookingMutation.isPending}>
+            <button
+              type="submit"
+              disabled={!isValid || bookingMutation.isPending}
+            >
               {bookingMutation.isPending ? 'Sending...' : 'Send'}
             </button>
           </form>

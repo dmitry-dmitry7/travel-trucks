@@ -80,13 +80,39 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #6c717b;
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #6c717b;
+    pointer-events: none;
 }
 
 .input {
     height: 48px;
+    width: 100%;
     border-radius: 12px;
-    border: 1px solid #ddd;
-    padding: 0 16px;
+    border: none;
+    padding: 0 16px 0 48px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #101828;
+
 }
 
 .group {
@@ -95,10 +121,24 @@
     gap: 12px;
 }
 
+.groupName {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #6c717b;
+}
+
 .radio {
     display: flex;
     align-items: center;
     gap: 8px;
+    text-transform: capitalize;
+}
+
+.radio input[type="radio"] {
+    width: 24px;
+    height: 24px;
+    accent-color: #475467;
 }
 
 .searchBtn {
@@ -213,12 +253,25 @@
 }
 
 .meta {
-    color: #666;
+    display: flex;
+    align-items: center;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #101828;
     margin-bottom: 20px;
+}
+
+.metaIcon {
+    width: 20px;
+    height: 18px;
+    margin: 0 5px 0 10px;
 }
 
 .tags {
     display: flex;
+    align-items: center;
     gap: 12px;
     flex-wrap: wrap;
     margin-bottom: 24px;
@@ -228,6 +281,34 @@
     background: #eef0f2;
     padding: 10px 16px;
     border-radius: 999px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+    color: #101828;
+    text-transform: capitalize;
+}
+
+.tagsFuel {
+    width: 22px;
+    height: 33px;
+    margin: 0 5px 0 10px;
+    vertical-align: middle;
+}
+
+.tagsDiagram {
+    width: 30px;
+    height: 22px;
+    margin: 0 5px 0 10px;
+    vertical-align: middle;
+}
+
+.tagsCar {
+    width: 30px;
+    height: 25px;
+    margin: 0 5px 0 10px;
+    vertical-align: middle;
 }
 
 .moreBtn {

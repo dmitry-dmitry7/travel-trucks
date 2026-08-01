@@ -8,6 +8,9 @@ import noCampersImg from '@/public/Image/no-campers-found.png';
 
 import { Camper, getCampers, getFilters } from '@/lib/api';
 
+import { BsMap, BsDiagram3, BsFuelPump } from 'react-icons/bs';
+import { IoMdCar } from 'react-icons/io';
+
 import styles from './Catalog.module.css';
 
 const PER_PAGE = 4;
@@ -100,22 +103,28 @@ export default function CatalogPage() {
         <form onSubmit={handleSubmit} className={styles.form}>
           <label className={styles.label}>
             Location
-            <input
-              type="text"
-              placeholder="Kyiv"
-              value={filters.location}
-              onChange={e =>
-                setFilters(prev => ({
-                  ...prev,
-                  location: e.target.value,
-                }))
-              }
-              className={styles.input}
-            />
+            <div className={styles.inputWrapper}>
+              <BsMap className={styles.inputIcon} />
+
+              <input
+                type="text"
+                placeholder="Kyiv"
+                value={filters.location}
+                onChange={e =>
+                  setFilters(prev => ({
+                    ...prev,
+                    location: e.target.value,
+                  }))
+                }
+                className={styles.input}
+              />
+            </div>
           </label>
 
+          <h3>Filters</h3>
+
           <div className={styles.group}>
-            <h3>Camper form</h3>
+            <p className={styles.groupName}>Camper form</p>
 
             {filterOptions?.forms.map(form => (
               <label key={form} className={styles.radio}>
@@ -136,7 +145,7 @@ export default function CatalogPage() {
           </div>
 
           <div className={styles.group}>
-            <h3>Engine</h3>
+            <p className={styles.groupName}>Engine</p>
 
             {filterOptions?.engines.map(engine => (
               <label key={engine} className={styles.radio}>
@@ -157,7 +166,7 @@ export default function CatalogPage() {
           </div>
 
           <div className={styles.group}>
-            <h3>Transmission</h3>
+            <p className={styles.groupName}>Transmission</p>
 
             {filterOptions?.transmissions.map(transmission => (
               <label key={transmission} className={styles.radio}>
@@ -252,14 +261,23 @@ export default function CatalogPage() {
 
                   <div className={styles.meta}>
                     ⭐ {camper.rating} ({camper.totalReviews} Reviews)
-                    {' • '}
+                    <BsMap className={styles.metaIcon} />
                     {camper.location}
                   </div>
 
                   <div className={styles.tags}>
-                    <span>{camper.engine}</span>
-                    <span>{camper.transmission}</span>
-                    <span>{camper.form}</span>
+                    <span>
+                      <BsFuelPump className={styles.tagsFuel} />
+                      {camper.engine}
+                    </span>
+                    <span>
+                      <BsDiagram3 className={styles.tagsDiagram} />
+                      {camper.transmission}
+                    </span>
+                    <span>
+                      <IoMdCar className={styles.tagsCar} />
+                      {camper.form}
+                    </span>
                   </div>
 
                   <Link
