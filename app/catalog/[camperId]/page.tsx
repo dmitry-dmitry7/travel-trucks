@@ -18,6 +18,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import type { Swiper as SwiperType } from 'swiper';
 
 import { BsMap } from 'react-icons/bs';
 
@@ -33,7 +34,7 @@ interface BookingFormData {
 }
 
 export default function CamperDetailsPage() {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   const { camperId } = useParams();
 
