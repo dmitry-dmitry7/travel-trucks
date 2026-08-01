@@ -11,18 +11,22 @@ export default function Header() {
 
   return (
     <header className={css.header}>
-      <div className={css.logo}>TravelTrucks</div>
+      <div className={css.container}>
+        <div className={css.logo}>
+          Travel<span className={css.logoRight}>Trucks</span>
+        </div>
 
-      <nav className={css.nav}>
-        <Link href="/" className={isActive ? `${css.active}` : ''}>
-          Home
-        </Link>
-        <Link href="/catalog" className={!isActive ? `${css.active}` : ''}>
-          Catalog
-        </Link>
-      </nav>
+        <nav className={css.nav}>
+          <Link href="/" className={isActive ? `${css.active}` : ''}>
+            Home
+          </Link>
+          <Link href="/catalog" className={!isActive ? `${css.active}` : ''}>
+            Catalog
+          </Link>
+        </nav>
 
-      <div className={css.empty}></div>
+        <div className={css.empty}></div>
+      </div>
     </header>
   );
 }

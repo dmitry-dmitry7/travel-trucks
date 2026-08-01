@@ -11,7 +11,9 @@
 }
 
 .overlay {
-    margin-left: 80px;
+    width: 1440px;
+    padding: 0 64px;
+    margin: 0 auto;
     color: white;
 }
 
